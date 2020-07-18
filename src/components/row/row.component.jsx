@@ -44,11 +44,41 @@ function Row({ title, fetchUrl, isLargeRow }) {
     }
   }
 
+  const scrollStep = 100;
+
+  function scrollRight(e) {
+    e.preventDefault();
+    let rowPosters = e.target.parentElement;
+    let sl = rowPosters.scrollLeft,
+      cw = rowPosters.scrollWidth;
+
+    if (sl + scrollStep >= cw) {
+      rowPosters.scrollTo({ left: cw, behavior: "smooth" });
+    } else {
+      rowPosters.scrollTo({ left: sl + scrollStep, behavior: "smooth" });
+    }
+  }
+
+  function scrollLeft(e) {
+    e.preventDefault();
+
+    let rowPosters = e.target.parentElement;
+    let sl = rowPosters.scrollRight,
+      cw = rowPosters.scrollWidth;
+
+    if (sl + scrollStep >= cw) {
+      rowPosters.scrollTo({ left: cw, behavior: "smooth" });
+    } else {
+      rowPosters.scrollTo({ left: sl + scrollStep, behavior: "smooth" });
+    }
+  }
+
   return (
     <div className="row">
       <h2>{title}</h2>
 
       <div className="row__posters">
+        <div className="row__scroll__left" onClick={(e) => scrollLeft(e)}></div>
         {movies.map((movie) => (
           <img
             key={movie.id}
@@ -60,7 +90,12 @@ function Row({ title, fetchUrl, isLargeRow }) {
             onClick={() => showTrailer(movie)}
           />
         ))}
+        <div
+          className="row__scroll__right"
+          onClick={(e) => scrollRight(e)}
+        ></div>
       </div>
+
       {trailerUrl && <YouTube videoId={trailerUrl} opts={opts} />}
     </div>
   );

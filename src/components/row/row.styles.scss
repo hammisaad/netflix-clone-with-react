@@ -1,8 +1,34 @@
 .row {
   margin-left: 15px;
+  position: relative;
+
+  .row__scroll__right,
+  .row__scroll__left {
+    opacity: 0;
+    height: 70%;
+    width: 60px;
+    background: rgba(255, 255, 255, 0.212);
+    position: absolute;
+    top: 20%;
+    cursor: pointer;
+    z-index: 1;
+
+    &:hover {
+      opacity: 1;
+      transition: opacity 0.1s;
+    }
+  }
+  .row__scroll__left {
+    left: 0;
+  }
+  .row__scroll__right {
+    right: 0;
+  }
+
   h2 {
     text-transform: capitalize;
   }
+
   .row__posters {
     display: flex;
     overflow-y: hidden;
@@ -27,6 +53,15 @@
       &:hover {
         transform: scale(1.09);
       }
+    }
+  }
+}
+
+@media screen and (max-width: 850px) {
+  .row {
+    .row__scroll__right,
+    .row__scroll__left {
+      display: none;
     }
   }
 }
