@@ -1,0 +1,24 @@
+.navbar {
+  position: fixed;
+  top: 0;
+  width: 100%;
+  z-index: 5;
+  padding: 10px 30px;
+  display: flex;
+  justify-content: space-between;
+  .navbar__logo {
+    width: 100px;
+    object-fit: contain;
+    cursor: pointer;
+  }
+  .navbar__avatar {
+    width: 36px;
+    cursor: pointer;
+    object-fit: contain;
+  }
+}
+
+.navbar__black {
+  background-color: #111;
+  transition: all 0.5s ease-in;
+}
